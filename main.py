@@ -5,16 +5,12 @@ import csv
 
 budget_csv= os.path.join('resources', 'budget_data.csv')
 
-# def sum(numbers):
-#     length = len(numbers)
-#     total = 0
-#     for number in numbers:
-#         total = total + number
-#         return total
-# print(sum([3,4,5]))
-# def budget_info(budget_list):
-#     Date = str(budget_list[0])
-#     PL = int(budget_list[1])
+def average(numbers):
+    length = len(numbers)
+    total = 0.0
+    for number in numbers:
+        total += number
+        return total / length
  
 # budget_info(Date)
 with open(budget_csv, 'r') as python_csvfile:
@@ -34,13 +30,22 @@ with open(budget_csv, 'r') as python_csvfile:
 
     months = 0
     profit_loss = []
-    # totalpl = 0
+    change = []
+    first_num = 0
+    
+    
     for row in python_csvfile:
         profit_loss.append(int(row[9:-1]))
         months = months + 1
+
+    for i in range(len(profit_loss)-1):
+        change.append(profit_loss[i+1]-profit_loss[i])
+        average_chage = average(change)
+
+
     print("Total Months: ", months)
     print("Total profit: ", sum(profit_loss))
-
+    print("Average Change: ", average_chage)
  
 
     
