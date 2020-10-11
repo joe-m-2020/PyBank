@@ -7,11 +7,7 @@ budget_csv= os.path.join('resources', 'budget_data.csv')
 
 #function to find average of change in profit/loss
 def average(numbers):
-    length = len(numbers)
-    total = 0.0
-    for number in numbers:
-        total += number
-        return total / length
+    return round(sum(numbers)/len(numbers),2)
  
 # budget_info(Date)
 with open(budget_csv, 'r') as python_csvfile:
@@ -47,10 +43,7 @@ with open(budget_csv, 'r') as python_csvfile:
         change.append(profit_loss[i+1]-profit_loss[i])
         average_change = average(change)
 
-    '''''
-    !!!!!!!!!!!!average change should be -2315.12!!!!!!!!!!!!
 
-    '''''
     
     #find greatest increase in list "change" with min and max
     #use the index function of the greatest increase and decrease then print the gi_increase +1 and gd_increase +1
@@ -63,10 +56,29 @@ with open(budget_csv, 'r') as python_csvfile:
 
     # print data summary
     print("Financial Analysis")
+    print("------------------")
     print(f"Total Months: {months}")
     print(f"Total profit: {sum(profit_loss)}")
     print(f"Average Change: {average_change}")
     print(f"Greatest Increase: {date[gi_index+1]} (${change[gi_index]})")
     print(f"Greatest Decrease: {date[gd_index+1]} (${change[gd_index]})")
 
+    l1 = ("Financial Analysis\n")
+    l2 = ("------------------\n")
+    l3 = (f"Total Months: {months}\n")
+    l4 = (f"Total profit: {sum(profit_loss)}\n")
+    l5 = (f"Average Change: {average_change}\n")
+    l6 = (f"Greatest Increase: {date[gi_index+1]} (${change[gi_index]})\n")
+    l7 = (f"Greatest Decrease: {date[gd_index+1]} (${change[gd_index]})\n")
+
+    results_path = os.path.join("analysis", "results.txt")
+    result_file = open(results_path,"w")
+    result_file.write(l1)
+    result_file.write(l2)
+    result_file.write(l3)
+    result_file.write(l4)
+    result_file.write(l5)
+    result_file.write(l6)
+    result_file.write(l7)
+    result_file.close
     
